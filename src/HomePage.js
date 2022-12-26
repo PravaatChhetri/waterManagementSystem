@@ -21,14 +21,14 @@ export default function FullWidthGrid() {
       <Grid container spacing={2}>
        
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} lg={4}>
           <Item>
             <div className="HomeContainer">
               <b>Tank Water Level (Meters)</b>
             </div>
           </Item>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} lg={8}>
           <Item>
             <div className="HomeContainer">
             <b>Flow Rate Display(m<sup>3</sup>/hour)</b>
@@ -36,21 +36,21 @@ export default function FullWidthGrid() {
             </div>
           </Item>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} lg={6}>
           <Item>
             <div className="HomeContainer">
               <b>Valve Position</b>
             </div>
           </Item>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} lg={3}>
           <Item>
             <div className="HomeContainer">
               <b>Water Quality</b>
             </div>
           </Item>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} lg={3}>
           <Item>
             <div className="HomeContainer">
               <b>Alarms and Events</b>
