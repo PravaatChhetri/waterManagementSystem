@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,6 +22,12 @@ import SpeedIcon from '@mui/icons-material/Speed';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import PersonIcon from '@mui/icons-material/Person';
 import ScienceIcon from '@mui/icons-material/Science';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {Header} from './HomePageComp';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+
 
 
 const drawerWidth = 240;
@@ -29,14 +36,35 @@ export const ResponsiveDrawer= (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const icon=[<HomeIcon/>,<AccountTreeIcon/>,<SpeedIcon/>,<ScienceIcon/>,<NotificationsActiveIcon/>,<NotificationsActiveIcon/>,<PersonIcon/>];
-
+  const [mode,setMode]=useState(true);
+  
+  const darkTheme = createTheme({
+    palette: {
+      mode: (mode? 'light':'dark'),
+      primary: {
+        main: '#fff',
+      },
+    },
+  });
+  
+  const setViewMode=()=>{
+    setMode(!mode);
+  }
+  
+  
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
     <div>
-      <Toolbar  />
+      <Typography >
+        <br/>
+        <b style={{fontSize:'14px'}}>DE-SUUNG NATIONAL <br/>SERVICE WATER PROJECT</b>
+        <br/><br/>
+        <p style={{color:'grey', fontSize:'10px'}}>Gyelpozhing Integrated Water Supply Pilot Project</p>
+        <br/>
+      </Typography>
       <Divider />
       <List>
         
@@ -51,6 +79,9 @@ export const ResponsiveDrawer= (props) => {
           </ListItem>
         ))}
       </List>
+        <IconButton sx={{ ml: 1, marginTop:'30vh',alignItems:'center',alignContent:'center' }} onClick={setViewMode} color="inherit">
+        {mode? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
      
     </div>
   );
@@ -58,6 +89,7 @@ export const ResponsiveDrawer= (props) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+<ThemeProvider theme={darkTheme}>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline /> 
       <AppBar
@@ -67,9 +99,9 @@ export const ResponsiveDrawer= (props) => {
             
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-        }}
+          }}
       >
-        <Toolbar >
+        <Toolbar  style={{height:'15vh', justifyContent:'center'}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -80,6 +112,9 @@ export const ResponsiveDrawer= (props) => {
           >
             <MenuIcon />
           </IconButton>
+          {/* <Typography variant="h3" noWrap component="div"> */}
+            <Header/>
+          {/* </Typography> */}
           
         </Toolbar>
       </AppBar>
@@ -120,15 +155,12 @@ export const ResponsiveDrawer= (props) => {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
+        <br/><br/><br/>
         <FullWidthGrid/>
-        <Typography paragraph>
-         
-        </Typography>
-        <Typography paragraph>
-          
-        </Typography>
+        
       </Box>
     </Box>
+</ThemeProvider>
   );
 }
 
