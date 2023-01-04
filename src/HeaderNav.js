@@ -14,7 +14,6 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import FullWidthGrid from "./HomePage";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import HomeIcon from "@mui/icons-material/Home";
 import SpeedIcon from "@mui/icons-material/Speed";
@@ -25,6 +24,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Header } from "./HomePageComp";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { Link } from "react-router-dom";
+
 
 const drawerWidth = 280;
 
@@ -64,6 +65,7 @@ export const ResponsiveDrawer = (props) => {
   };
 //Items in side-nav-bar
   const drawer = (
+
     <div>
       <List>
         <ListItem>
@@ -88,27 +90,29 @@ export const ResponsiveDrawer = (props) => {
       <Divider />
       <List>
         {[
-          "Home",
-          "SCADA Display",
-          "Valve Controller",
-          "Water Flow Display",
-          "Alarms and Events",
-          "Event Log",
-          "Account",
+          {title: "Home", path: "/"},
+          {title:"SCADA Display",path:"/SCADA-Display"},
+          {title:"Valve Controller", path:"/Valve-Controller"},
+          {title:"Water Flow Display",path:"/Water-Flow-Display"},
+          {title:"Alarms and Events",path:"/Alarms-and-Events"},
+          {title:"Event Log",path:"/Event-Log"},
+          {title:"Log Out",path:"/Log-Out"},
         ].map((text, index) => (
           <ListItem key={text}>
-            <ListItemButton>
+              <Link to={text.path}>
+            <ListItemButton className="text-black">
               <ListItemIcon>{icon[index]}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText  primary={text.title} />
             </ListItemButton>
+              </Link>
           </ListItem>
         ))}
       </List>
       <List>
-        <ListItem>
+        <ListItem   sx={{ mt:15 }}>
           <ListItemButton>
             <IconButton
-              sx={{ ml:10, mt:15 }}
+              sx={{ ml: 10}}
               onClick={setViewMode}
               color="inherit"
             >
@@ -187,20 +191,9 @@ export const ResponsiveDrawer = (props) => {
             {drawer}
           </Drawer>
         </Box>
-        <Box
-          component="main"
-          sx={{
-            mt:16,
-            flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}
-        >
-
-          <FullWidthGrid />
         
         
-        </Box>
+       
       </Box>
     </ThemeProvider>
   );
